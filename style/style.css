@@ -1,0 +1,36 @@
+#container_fot_map {
+    width: 100%;
+    text-align: center;
+}
+
+
+#map {
+    display: inline-block;
+    width: 98%;
+    height: 98vh;
+    position: relative;
+}
+
+#moreData {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border-radius: 25px;
+    width: 35%;
+    height: 80%;
+    pointer-events: all;
+    margin: auto;
+}
+
+#divCross {
+    width: 100%;
+    text-align: right;
+}
+
+#cross {
+    margin: 0 auto;
+    width: 30px;
+    margin: 2%;
+    height: auto;
+}
