@@ -1,10 +1,21 @@
-import {listPlaces} from "./sources/places.js"
 ymaps.ready(init);
+import {listPlaces} from './places.js'
 let coords;
     navigator.geolocation.getCurrentPosition((pos)=>coords = [pos.coords.latitude,pos.coords.longitude]);
+let bubble1 = document.getElementById('bubble1');
 
+    
 
 function init () {
+    ymaps.domEvent.manager.add(bubble1,'click',function (event){
+        myMap.geoObjects.removeAll();
+        listPlaces.forEach(element => {      
+            if(element.type=="monument") 
+            myMap.geoObjects.add(setPlacemark(element)).add(myPlacemark);
+        });
+       
+    })
+    console.log("dsadasd")
     if (coords==undefined) coords = [51.529,45.98]
     let  myMap = new ymaps.Map('map', {
         // При инициализации карты обязательно нужно указать
@@ -21,10 +32,11 @@ function init () {
         iconImageOffset: [-5, -38]
     })
     myMap.geoObjects.add(myPlacemark);
+    
 
-    for (let i =0;i<listPlaces.length;i++){
+    /*for (let i =0;i<listPlaces.length;i++){
         myMap.geoObjects.add(setPlacemark(listPlaces[i]))
-    }
+    }*/
     var myPolygon = new ymaps.Polygon([ [ [ 51.5432, 46.0487 ], [ 51.5432, 46.0498 ], [ 51.5437, 46.0505 ], 
         [ 51.5436, 46.0512 ], [ 51.5439, 46.0517 ], [ 51.5435, 46.0527 ], 
         [ 51.5418, 46.0544 ], [ 51.5416, 46.0541 ], [ 51.5420, 46.0533 ], 

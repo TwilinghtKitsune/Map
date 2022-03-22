@@ -1,3 +1,4 @@
+
     function move (id, position, color) {
         var tl = gsap.timeline();
         tl.to("#bgBubble", {duration: 0.15, bottom: "-30px", ease: "ease-out"}, 0)
@@ -14,6 +15,7 @@
           .to("#bgBubble", {duration: 0.3, backgroundColor: "#fff", ease: "ease-in-out"}, 0)
       }
 
+      
 
 
 
