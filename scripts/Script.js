@@ -1,5 +1,10 @@
 ymaps.ready(init);
 
+// json 
+let points = '{"points":[ { "coordinates1":51.544108, "coordinates2":46.047895, "balloonContentHeader": "Какая-то точка № 1", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 1", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1":51.543602, "coordinates2": 46.049537, "balloonContentHeader": "Какая-то точка № 2", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 2", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1": 51.543595, "coordinates2":46.048043, "balloonContentHeader": "Какая-то точка № 3", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 3", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1":51.540756, "coordinates2":46.047147, "balloonContentHeader": "Светофор", "balloonContentBody": "Traffic lights", "hintContent": "Светофор", "src" : "img/traffic_light.png", "text" : "Эта точка была почти случайным образом добавлена на карту" }]}';
+
+let point = JSON.parse(points);
+
 function init(){
     let myMap = new ymaps.Map("map", {
         center: [51.544313, 46.049724],
@@ -9,18 +14,13 @@ function init(){
     
     let marks = [];
 
-    // json 
-    let points = '{"points":[ { "coordinates1":51.544108, "coordinates2":46.047895, "balloonContentHeader": "<h><b>Какая-то точка № 1</b></h>", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 1" }, { "coordinates1":51.543602, "coordinates2": 46.049537, "balloonContentHeader": "<h><b>Какая-то точка № 2</b></h>", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 2" }, { "coordinates1": 51.543595, "coordinates2":46.048043, "balloonContentHeader": "<h><b>Какая-то точка № 3</b></h>", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 3"}, { "coordinates1":51.540756, "coordinates2":46.047147, "balloonContentHeader": "<h><b>Светофор</b></h>", "balloonContentBody": "Traffic lights", "hintContent": "Светофор" }]}';
-
-    let point = JSON.parse(points);
-
     // С json
     for(let i = 0; i < point.points.length; i++){
         console.log(i);
         console.log(point.points[i].coordinates1);
         console.log(point.points[i].coordinates2);
         marks[i] = new ymaps.Placemark([point.points[i].coordinates1, point.points[i].coordinates2], {
-            balloonContentHeader: point.points[i].balloonContentHeader,
+            balloonContentHeader: "<h><b>" + point.points[i].balloonContentHeader + "</b></h>",
             balloonContentBody: point.points[i].balloonContentBody,
             balloonContentFooter: '<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(' + i + ')">',
             hintContent: point.points[i].hintContent
@@ -129,21 +129,12 @@ function init(){
     myMap.geoObjects.add(clusterer);
 }
 
-function moreInf(numberMark){
+function moreInf(i) {
     document.getElementById("moreData").style.display = "block";
-    switch(numberMark){
-        case 0:
-        case 1:
-        case 2:
-            document.getElementById("divForText").innerHTML = "<h><b>Точка №" + numberMark + "</b><br><br></h><img type='image' src='img/8168.png' alt='Точка' style = 'width: 100px; height: auto'><p><br>Эта точка была случайным образом добавлена на карту</p>";
-            break;
-        case 3:
-            document.getElementById("divForText").innerHTML = "<h><b>Случайный светофор</b><br><br></h><img type='image' src='img/8168.png' alt='Точка' style = 'width: 100px; height: auto'><p><br>Эта точка была почти случайным образом добавлена на карту</p>";
-            break;
-    }
+    document.getElementById("divForText").innerHTML = "<h><b>" + point.points[i].balloonContentHeader + "</b><br><br></h><img type='image' src= '" + point.points[i].src  + "' alt='Точка' style = 'width: 100px; height: auto'><p><br>" + point.points[i].text + "</p>";
 }
 
-function closeMoreInf(){
+function closeMoreInf() {
     console.log("close");
     document.getElementById("moreData").style.display = 'none';
 }
