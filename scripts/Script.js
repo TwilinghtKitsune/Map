@@ -1,33 +1,39 @@
 ymaps.ready(init);
 
 // json 
-let points = '{"points":[ { "coordinates1":51.544108, "coordinates2":46.047895, "balloonContentHeader": "Какая-то точка № 1", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 1", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1":51.543602, "coordinates2": 46.049537, "balloonContentHeader": "Какая-то точка № 2", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 2", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1": 51.543595, "coordinates2":46.048043, "balloonContentHeader": "Какая-то точка № 3", "balloonContentBody": "Эту точку я поставила просто так", "hintContent": "Какая-то точка № 3", "src" : "img/8168.png", "text" : "Эта точка была случайным образом добавлена на карту" }, { "coordinates1":51.540756, "coordinates2":46.047147, "balloonContentHeader": "Светофор", "balloonContentBody": "Traffic lights", "hintContent": "Светофор", "src" : "img/traffic_light.png", "text" : "Эта точка была почти случайным образом добавлена на карту" }]}';
-
+let points = '{"points":[';
+let p1 = '{ "coordinates1":51.526125, "coordinates2":45.979220, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Клочкова В.Г.", "hintContent": "Стела Героя Советского Союза Клочкова В.Г.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Клочкова В.Г." },';
+let p2 = '{ "coordinates1":51.518508, "coordinates2": 46.006408, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь тружеников тыла", "hintContent": "Памятник труженикам тыла", "src" : "img/image.png", "text" : "Стела, установленная в честь тружеников тыла" },';
+let p3 = '{ "coordinates1": 51.525439, "coordinates2": 46.005223, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Хользунова А.И.", "hintContent": "Стела Героя Советского Союза Хользунова А.И.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Хользунова А.И." },';
+let p4 = '{ "coordinates1": 51.515092, "coordinates2": 45.989664, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Грибова П.И.", "hintContent": "Стела Героя Советского Союза Грибова П.И.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Грибова П.И." },';
+let p5 = '{ "coordinates1": 51.538350, "coordinates2": 45.991328, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Емлютина Д.В.", "hintContent": "Стела Героя Советского Союза Емлютина Д.В.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Емлютина Д.В." },';
+let p6 = '{ "coordinates1": 51.49367301783019, "coordinates2": 45.92122820983902, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Расковой М.М.", "hintContent": "Стела Героя Советского Союза Расковой М.М.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Расковой М.М." },';
+let p7 = '{ "coordinates1": 51.49612596537969, "coordinates2": 45.93894175758242, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Пономарёва П.Т.", "hintContent": "Стела Героя Советского Союза Пономарёва П.Т.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Пономарёва П.Т." }';
+points += p1 + p2 + p3 + p4 + p5 + p6 + p7 + "]}";
 let point = JSON.parse(points);
 
 function init(){
     let myMap = new ymaps.Map("map", {
-        center: [51.544313, 46.049724],
-        zoom: 15,
+        center: [51.525746, 45.988529],
+        zoom: 13, //or 13.5 
         controls: ['zoomControl'] // Оставляет только «Ползунок масштаба»
     },{suppressMapOpenBlock: true}); // Убирает кнопки "как добраться" и "доехать на такси"
     
     let marks = [];
+    
 
     // С json
     for(let i = 0; i < point.points.length; i++){
-        console.log(i);
-        console.log(point.points[i].coordinates1);
-        console.log(point.points[i].coordinates2);
         marks[i] = new ymaps.Placemark([point.points[i].coordinates1, point.points[i].coordinates2], {
-            balloonContentHeader: "<h><b>" + point.points[i].balloonContentHeader + "</b></h>",
+            balloonContentHeader: "<img type='image' src= " + point.points[i].balloonContentHeader + " alt=' '>",
             balloonContentBody: point.points[i].balloonContentBody,
-            balloonContentFooter: '<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(' + i + ')">',
-            hintContent: point.points[i].hintContent
+            balloonContentFooter: '<input type="button" class = "butMark" value="Узнать подробнее..." onclick="moreInf(' + i + ')">',
+            hintContent: point.points[i].hintContent,
         }, {
             iconLayout: 'default#image',
-            iconImageHref: 'img/8168.png',
-            iconImageSize: [42, 42],
+            iconImageHref: 'img/326703_favorite_rate_star_icon.png',
+            iconImageSize: [40, 40],
+            iconImageOffset: [-20, -20]           
         });
     }
 
@@ -131,7 +137,7 @@ function init(){
 
 function moreInf(i) {
     document.getElementById("moreData").style.display = "block";
-    document.getElementById("divForText").innerHTML = "<h><b>" + point.points[i].balloonContentHeader + "</b><br><br></h><img type='image' src= '" + point.points[i].src  + "' alt='Точка' style = 'width: 100px; height: auto'><p><br>" + point.points[i].text + "</p>";
+    document.getElementById("divForText").innerHTML = "<h><b>" + point.points[i].hintContent + "</b><br><br></h><img type='image' src= '" + point.points[i].src  + "' alt='Точка' style = 'width: 100px; height: auto'><p><br>" + point.points[i].text + "</p>";
 }
 
 function closeMoreInf() {
