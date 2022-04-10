@@ -1,0 +1,90 @@
+
+#container_fot_map {
+    width: 100%;
+    text-align: center;
+}
+
+
+#map {
+    display: inline-block;
+    width: 98%;
+    height: 98vh;
+    position: relative;
+}
+
+#moreData {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    border-radius: 25px;
+    width: 35%;
+    height: 80%;
+    pointer-events: all;
+    margin: auto;
+}
+
+#divCross {
+    width: 100%;
+    text-align: right;
+}
+
+#cross {
+    margin: 0 auto;
+    width: 30px;
+    margin: 2%;
+    height: auto;
+}
+.wrapper{
+    display: flex;
+    width: 182px;
+    height: 176px;
+    border-radius: 2px;
+    flex-direction: column;
+    
+}
+.ballon-content{
+    margin: 0px;
+    padding: 0px;
+}
+
+.content-body{
+    width: 150px;
+    height: 48px;
+    font-size: 12px;
+    line-height: 16.34px;
+    font-family: 'NotoSans';
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.content-footer{
+    width: 150px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+ymaps[class$="balloon__layout"] {
+    padding: 0px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  }
+  ymaps[class$="balloon__content"] {
+    padding: 0px;
+    margin-right: 0px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  }
+  ymaps[class$="balloon__close-button"] {
+    width: 10px;
+    height: 10px; 
+    margin-top: 10px;
+    margin-right: 5px;
+
+  }
+  ymaps[class$="balloon__close"] + ymaps[class$="balloon__content"] {
+    margin-right: 0px;
+  }
+  
+@font-face {
+    font-family: "NotoSans";
+    src: url(../Fonts/NotoSans-Regular.ttf);
+}
