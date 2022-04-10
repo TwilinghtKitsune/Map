@@ -37,79 +37,7 @@ function init(){
         });
     }
 
-    // Без json:
-
-    /*marks[0] = new ymaps.Placemark([51.544108, 46.047895], {
-        balloonContentHeader: '<h><b>Какая-то точка № 1</b></h>',
-        balloonContentBody: 'Эту точку я поставила просто так',
-        balloonContentFooter:'<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(1)">',
-        hintContent: 'Какая-то точка № 1'
-    }, {
-        // Опции.
-        // Необходимо указать данный тип макета.
-        iconLayout: 'default#image',
-        // Своё изображение иконки метки.
-        iconImageHref: 'img/8168.png',
-        // Размеры метки.
-        iconImageSize: [42, 42],
-        // Смещение левого верхнего угла иконки относительно
-        // её "ножки" (точки привязки).
-    // iconImageOffset: [-5, -38]
-    });
-
-    marks[1] = new ymaps.Placemark([51.543602, 46.049537], {
-        balloonContentHeader: '<h><b>Какая-то точка № 2</b></h>',
-        balloonContentBody: 'Эту точку я поставила просто так',
-        balloonContentFooter:'<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(2)">',
-        hintContent: 'Какая-то точка № 2'
-    }, {
-        // Опции.
-        // Необходимо указать данный тип макета.
-        iconLayout: 'default#image',
-        // Своё изображение иконки метки.
-        iconImageHref: 'img/8168.png',
-        // Размеры метки.
-        iconImageSize: [42, 42],
-        // Смещение левого верхнего угла иконки относительно
-        // её "ножки" (точки привязки).
-    // iconImageOffset: [-5, -38]
-    });
-
-    marks[2] = new ymaps.Placemark([51.543595, 46.048043], {
-        balloonContentHeader: '<h><b>Какая-то точка № 3</b></h>',
-        balloonContentBody: 'Эту точку я поставила просто так',
-        balloonContentFooter:'<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(3)">',
-        hintContent: 'Какая-то точка № 3'
-    }, {
-        // Опции.
-        // Необходимо указать данный тип макета.
-        iconLayout: 'default#image',
-        // Своё изображение иконки метки.
-        iconImageHref: 'img/8168.png',
-        // Размеры метки.
-        iconImageSize: [42, 42],
-        // Смещение левого верхнего угла иконки относительно
-        // её "ножки" (точки привязки).
-    // iconImageOffset: [-5, -38]
-    });
-
-    marks[3] = new ymaps.Placemark([51.540756, 46.047147], {
-        balloonContentHeader: '<h><b>Светофор</b></h>',
-        balloonContentBody: 'Traffic lights',
-        balloonContentFooter:'<input type="button" class = "butMark" value="Показать всю информацию" onclick="moreInf(4)">',
-        hintContent: 'Светофор'
-    }, {
-        // Опции.
-        // Необходимо указать данный тип макета.
-        iconLayout: 'default#image',
-        // Своё изображение иконки метки.
-        iconImageHref: 'img/8168.png',
-        // Размеры метки.
-        iconImageSize: [42, 42],
-        // Смещение левого верхнего угла иконки относительно
-        // её "ножки" (точки привязки).
-    // iconImageOffset: [-5, -38]
-    });*/
+    
 
     let clusterer = new ymaps.Clusterer({
         clusterIcons: [
@@ -118,17 +46,8 @@ function init(){
                 size: [42, 42],
                 offset: [-20, -20]
             }],
-        //clusterIconContentLayout: null,
-        //gridSize: 64,                       //Размер ячейки кластеризации в пикселях (умолч. 64)
-        //groupByCoordinates: false,          //Специальный режим работы кластеризатора при котором кластеры образуются только из геобъектов с одинаковыми координатами (умолч. false)
-        //hasBalloon: true,                   //Флаг наличия у кластеризатора поля .balloon. (умолч. true)
-        //hasHint: true,                      //Флаг наличия у кластеризатора поля .hint (умолч. true)
-        //margin: 10,                         //Число или массив чисел, задающие отступ для центра кластера относительно ячеек кластеризации (умолч. 10)
-        //maxZoom: Infinity,                  //Максимальный коэффициент масштабирования карты, на котором происходит кластеризация объектов (умолч. Infinity)
-        //minClusterSize: 2,                  //Минимальное количество объектов, образующих кластер (умолч. 2)
+        
         showInAlphabeticalOrder: true,        //Показывать метки в балуне в алфавитном порядке при нажатии на кластер (умолч. false)
-        //viewportMargin: 128,                //Отступ для области, в которой производится кластеризация (умолч. 128)
-        //zoomMargin: 0,                      //Отступы от границ видимой области карты, которые соблюдаются при приближении карты после клика на кластере (умолч. 0)
         clusterDisableClickZoom: true,
     });
     clusterer.add(marks);
