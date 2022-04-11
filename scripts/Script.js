@@ -29,7 +29,7 @@ function init(){
             balloonContent: '<div class = "wrapper">' + 
                             "<div class = 'content-image'> <img type='image2' src= " + point.points[i].balloonContentHeader + " alt=' '> </div>" +
                             `<div class = 'content-body'> ${point.points[i].balloonContentBody} </div>` +
-                            "<div class = 'content-footer'> <input type='button' class = 'butMark' value='Узнать подробнее...' onclick='moreInf(" + i + ")'> </<div></div>",
+                            '<div class = "content-footer"> <input type="button" class = "butMark" value="Узнать подробнее..." onclick="moreInf(' + i + ')"> </<div></div>',
             hintContent: point.points[i].hintContent,
         }, {
             iconLayout: 'default#image',
