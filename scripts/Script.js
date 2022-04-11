@@ -11,9 +11,10 @@ let p6 = '{ "coordinates1": 51.49367301783019, "coordinates2": 45.92122820983902
 let p7 = '{ "coordinates1": 51.49612596537969, "coordinates2": 45.93894175758242, "balloonContentHeader": "img/image.png", "balloonContentBody": "Стела, установленная в честь героя Советского союза Пономарёва П.Т.", "hintContent": "Стела Героя Советского Союза Пономарёва П.Т.", "src" : "img/image.png", "text" : "Стела, установленная в честь героя Советского союза Пономарёва П.Т." }';
 points += p1 + p2 + p3 + p4 + p5 + p6 + p7 + "]}";
 let point = JSON.parse(points);
+let myMap
 
 function init(){
-    let myMap = new ymaps.Map("map", {
+    myMap = new ymaps.Map("map", {
         center: [51.525746, 45.988529],
         zoom: 13, //or 13.5 
         controls: ['zoomControl'] // Оставляет только «Ползунок масштаба»
@@ -25,9 +26,10 @@ function init(){
     // С json
     for(let i = 0; i < point.points.length; i++){
         marks[i] = new ymaps.Placemark([point.points[i].coordinates1, point.points[i].coordinates2], {
-            balloonContentHeader: "<img type='image' src= " + point.points[i].balloonContentHeader + " alt=' '>",
-            balloonContentBody: point.points[i].balloonContentBody,
-            balloonContentFooter: '<input type="button" class = "butMark" value="Узнать подробнее..." onclick="moreInf(' + i + ')">',
+            balloonContent: '<div class = "wrapper">' + 
+                            "<div class = 'content-image'> <img type='image2' src= " + point.points[i].balloonContentHeader + " alt=' '> </div>" +
+                            `<div class = 'content-body'> ${point.points[i].balloonContentBody} </div>` +
+                            "<div class = 'content-footer'> <input type='button' class = 'butMark' value='Узнать подробнее...' onclick='moreInf(" + i + ")'> </<div></div>",
             hintContent: point.points[i].hintContent,
         }, {
             iconLayout: 'default#image',
@@ -55,11 +57,21 @@ function init(){
 }
 
 function moreInf(i) {
+    myMap.balloon.close();
     document.getElementById("moreData").style.display = "block";
+    document.getElementById("moreData").style.animation = "aniMoreData_1 0.9s linear both";
     document.getElementById("divForText").innerHTML = "<h><b>" + point.points[i].hintContent + "</b><br><br></h><img type='image' src= '" + point.points[i].src  + "' alt='Точка' style = 'width: 100px; height: auto'><p><br>" + point.points[i].text + "</p>";
+    document.getElementById("divForText").style.display = "block";
+    document.getElementById("moreData").addEventListener('animationend', function() {
+        document.getElementById("moreData").style.display = "block";
+    });
 }
 
 function closeMoreInf() {
     console.log("close");
-    document.getElementById("moreData").style.display = 'none';
+    document.getElementById("divForText").style.display = "none";
+    document.getElementById("moreData").style.animation = "aniMoreData_2 0.9s linear both";
+    document.getElementById("moreData").addEventListener('animationend', function() {
+        document.getElementById("moreData").style.display = 'none';
+    });    
 }
